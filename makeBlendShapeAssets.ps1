@@ -3,7 +3,7 @@
 $UTF8NoBomEnc = New-Object System.Text.UTF8Encoding $False
 
 $outputDir = "E:\Repositories\chores\output"
-$initial_index = 26
+$initIndex = 26
 $parentFileID = 11500000
 $childFileID = 11400000
 $parentGUID = "37562b39ff933b245ac2f35d87edbcd6"
@@ -90,7 +90,7 @@ MonoBehaviour:
   Values:
   - RelativePath: Mesh_Head
 "@
-  $val7 = "    Index: " + ($initial_index + $i)
+  $val7 = "    Index: " + ($initIndex + $i)
   $val8 = @"
     Weight: 100
   MaterialValues: []
