@@ -1,3 +1,5 @@
+# ARKitBlendShapeLocationに従ってBlendShapeClipを作成するスクリプト
+
 $UTF8NoBomEnc = New-Object System.Text.UTF8Encoding $False
 
 $outputDir = "E:\Repositories\chores\output"
