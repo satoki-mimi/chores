@@ -5,4 +5,4 @@
 ARKitBlendShapeLocationに従ってBlendShapeClipを作成するスクリプト
 
 ## bouncingBall
-キャンバスでボールがバウンドするスクリプト
+htmlのcanvasでボールがバウンドするだけ
