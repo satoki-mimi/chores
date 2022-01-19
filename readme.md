@@ -1,5 +1,5 @@
 # スクリプトの掃きだめ
-リポジトリを分ける必要はないくらいのものを置いておく
+リポジトリを分ける必要がないくらいのものを置いておく
 
 ## makeBlendShapeAssets
 UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加する。
