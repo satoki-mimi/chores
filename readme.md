@@ -2,7 +2,9 @@
 リポジトリを分ける必要はないくらいのものを置いておく
 
 ## makeBlendShapeAssets
-ARKitBlendShapeLocationに従ってBlendShapeClipを作成するスクリプト
+UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加する。
+3Dモデルをパーフェクトシンクに対応させるために作成した。
 
 ## bouncingBall
-htmlのcanvasでボールがバウンドするだけ
+htmlのcanvasでボールがバウンドするだけ。
+なぜか職場の同僚から作ってほしいと言われたので作成した。
