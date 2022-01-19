@@ -1,4 +1,4 @@
-# 自分用に作成したスクリプトの掃きだめ
+# スクリプトの掃きだめ
 
 ## makeBlendShapeAssets
 ARKitBlendShapeLocationに従ってBlendShapeClipを作成するスクリプト
