@@ -5,6 +5,6 @@
 UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加する。
 3Dモデルをパーフェクトシンクに対応させるために作成した。
 
-## bouncingBall
-htmlのcanvasでボールがバウンドするだけ。
-なぜか職場の同僚から作ってほしいと言われたので作成した。
+## bouncingBalls
+htmlのcanvasでボールがバウンドする。クリックすると消える。
+なぜか職場の同僚から作ってほしいと言われたので作成した。コメントアウトが無駄に多い
