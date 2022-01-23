@@ -52,7 +52,7 @@
             return [R, G, B];
         }
 
-        // 色相を9分割（→彩度、↓明度）
+        // 色相をN^2分割（→彩度、↓明度）
         function draw0(canvas) {
             let context = canvas.getContext("2d")
             for (let i = 0; i < size; i++) {
@@ -70,7 +70,7 @@
             return canvas;
         }
 
-        // 色相を9分割（→明度、↓彩度）
+        // 色相をN^2分割（→明度、↓彩度）
         function draw1(canvas) {
             let context = canvas.getContext("2d")
             for (let i = 0; i < size; i++) {
@@ -89,7 +89,7 @@
             return canvas;
         }
 
-        // 彩度を9分割（→明度、↓色相）
+        // 彩度をN^2分割（→明度、↓色相）
         function draw2(canvas) {
             let context = canvas.getContext("2d")
             for (let i = 0; i < size; i++) {
@@ -108,7 +108,7 @@
             return canvas;
         }
 
-        // 彩度を9分割（→色相、↓明度）
+        // 彩度をN^2分割（→色相、↓明度）
         function draw3(canvas) {
             let context = canvas.getContext("2d")
             for (let i = 0; i < size; i++) {
@@ -127,7 +127,7 @@
             return canvas;
         }
 
-        // 明度を9分割（→彩度、↓色相）
+        // 明度をN^2分割（→彩度、↓色相）
         function draw4(canvas) {
             let context = canvas.getContext("2d")
             for (let i = 0; i < size; i++) {
@@ -146,7 +146,7 @@
             return canvas;
         }
 
-        // 明度を9分割（→色相、↓彩度）
+        // 明度をN^2分割（→色相、↓彩度）
         function draw5(canvas) {
             let context = canvas.getContext("2d")
             for (let i = 0; i < size; i++) {
