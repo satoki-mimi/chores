@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <style>
+        canvas {
+            margin: 5;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 正方形になるようにタイリングする
+        const size = 64;
+        const N = 2; // 一辺のタイルの数
+        const aSide = size / N; // タイルの一辺の長さ[px]
+
+        // キャンバスを用意
+        const canvasNum = 6;
+        const canvas = [];
+        const context = [];
+        for (let i = 0; i < canvasNum; i++) {
+            canvas.push(document.createElement("canvas"));
+            canvas[i].width = size;
+            canvas[i].height = size;
+            context.push(canvas[i].getContext("2d"));
+        }
+
+        /*
+            https://ja.wikipedia.org/wiki/HSV色空間
+            色相（H）: 0 - 360
+            彩度（S）: 0 - 1.0
+            明度（V）: 0 - 1.0
+        */
+        function hsvToRgb(H, S, V) {
+            const C = V * S;
+            const Hd = H / 60;
+            const X = C * (1 - Math.abs(Hd % 2 - 1));
+            let R, G, B;
+            if (0 <= Hd && Hd < 1) [R, G, B] = [C, X, 0];
+            else if (1 <= Hd && Hd < 2) [R, G, B] = [X, C, 0];
+            else if (2 <= Hd && Hd < 3) [R, G, B] = [0, C, X];
+            else if (3 <= Hd && Hd < 4) [R, G, B] = [0, X, C];
+            else if (4 <= Hd && Hd < 5) [R, G, B] = [X, 0, C];
+            else if (5 <= Hd && Hd < 6) [R, G, B] = [C, 0, X];
+            [R, G, B] = [
+                Math.floor((R + V - C) * 255),
+                Math.floor((G + V - C) * 255),
+                Math.floor((B + V - C) * 255)
+            ];
+            return [R, G, B];
+        }
+
+        // 色相を9分割（→彩度、↓明度）
+        function draw0(canvas) {
+            let context = canvas.getContext("2d")
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let s = (aSide - mod_i) / aSide;
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let v = (aSide - mod_j) / aSide;
+                    let h = (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2) * 360;
+                    context.fillStyle = 'rgb(' + hsvToRgb(h, s, v).join(",") + ')';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 色相を9分割（→明度、↓彩度）
+        function draw1(canvas) {
+            let context = canvas.getContext("2d")
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let v = (aSide - mod_i) / aSide;
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let s = (aSide - mod_j) / aSide;
+                    let h = (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2) * 360;
+
+                    context.fillStyle = 'rgb(' + hsvToRgb(h, s, v).join(",") + ')';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 彩度を9分割（→明度、↓色相）
+        function draw2(canvas) {
+            let context = canvas.getContext("2d")
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let v = (aSide - mod_i) / aSide;
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let h = (aSide - mod_j - 1) / aSide * 360;
+                    let s = 1 - (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2);
+
+                    context.fillStyle = 'rgb(' + hsvToRgb(h, s, v).join(",") + ')';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 彩度を9分割（→色相、↓明度）
+        function draw3(canvas) {
+            let context = canvas.getContext("2d")
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let h = (aSide - mod_i - 1) / aSide * 360;
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let v = (aSide - mod_j) / aSide;
+                    let s = 1 - (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2);
+
+                    context.fillStyle = 'rgb(' + hsvToRgb(h, s, v).join(",") + ')';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 明度を9分割（→彩度、↓色相）
+        function draw4(canvas) {
+            let context = canvas.getContext("2d")
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let s = (aSide - mod_i) / aSide;
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let h = (aSide - mod_j - 1) / aSide * 360;
+                    let v = 1 - (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2);
+
+                    context.fillStyle = 'rgb(' + hsvToRgb(h, s, v).join(",") + ')';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 明度を9分割（→色相、↓彩度）
+        function draw5(canvas) {
+            let context = canvas.getContext("2d")
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let h = (aSide - mod_i - 1) / aSide * 360;
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let s = (aSide - mod_j) / aSide;
+                    let v = 1 - (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2);
+
+                    context.fillStyle = 'rgb(' + hsvToRgb(h, s, v).join(",") + ')';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        document.body.appendChild(draw0(canvas[0]));
+        document.body.appendChild(draw1(canvas[1]));
+        document.body.appendChild(draw2(canvas[2]));
+        document.body.appendChild(draw3(canvas[3]));
+        document.body.appendChild(draw4(canvas[4]));
+        document.body.appendChild(draw5(canvas[5]));
+    </script>
+</body>
+
+</html>
