@@ -54,7 +54,7 @@
 
         // 色相をN^2分割（→彩度、↓明度）
         function draw0(canvas) {
-            let context = canvas.getContext("2d")
+            let context = canvas.getContext("2d");
             for (let i = 0; i < size; i++) {
                 let mod_i = i % aSide;
                 let s = (aSide - mod_i) / aSide;
@@ -72,7 +72,7 @@
 
         // 色相をN^2分割（→明度、↓彩度）
         function draw1(canvas) {
-            let context = canvas.getContext("2d")
+            let context = canvas.getContext("2d");
             for (let i = 0; i < size; i++) {
                 let mod_i = i % aSide;
                 let v = (aSide - mod_i) / aSide;
@@ -91,7 +91,7 @@
 
         // 彩度をN^2分割（→明度、↓色相）
         function draw2(canvas) {
-            let context = canvas.getContext("2d")
+            let context = canvas.getContext("2d");
             for (let i = 0; i < size; i++) {
                 let mod_i = i % aSide;
                 let v = (aSide - mod_i) / aSide;
@@ -110,7 +110,7 @@
 
         // 彩度をN^2分割（→色相、↓明度）
         function draw3(canvas) {
-            let context = canvas.getContext("2d")
+            let context = canvas.getContext("2d");
             for (let i = 0; i < size; i++) {
                 let mod_i = i % aSide;
                 let h = (aSide - mod_i - 1) / aSide * 360;
@@ -129,7 +129,7 @@
 
         // 明度をN^2分割（→彩度、↓色相）
         function draw4(canvas) {
-            let context = canvas.getContext("2d")
+            let context = canvas.getContext("2d");
             for (let i = 0; i < size; i++) {
                 let mod_i = i % aSide;
                 let s = (aSide - mod_i) / aSide;
@@ -148,7 +148,7 @@
 
         // 明度をN^2分割（→色相、↓彩度）
         function draw5(canvas) {
-            let context = canvas.getContext("2d")
+            let context = canvas.getContext("2d");
             for (let i = 0; i < size; i++) {
                 let mod_i = i % aSide;
                 let h = (aSide - mod_i - 1) / aSide * 360;
