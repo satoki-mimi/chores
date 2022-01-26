@@ -1,0 +1,168 @@
+<html>
+
+<head>
+    <style>
+        canvas {
+            margin: 5;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /*
+            HSL色空間について
+                hue：色相 （0~360）
+                saturation：彩度 (0% ~ 100%)
+                lightness：輝度 (0% ~ 100%)
+        */
+
+        // 正方形になるようにタイリングする
+        const size = 16;
+        const N = 2; // 一辺のタイルの数
+        const aSide = size / N; // タイルの一辺の長さ[px]
+
+        // キャンバスを用意
+        const canvasNum = 6;
+        const canvas = [];
+        const context = [];
+        for (let i = 0; i < canvasNum; i++) {
+            canvas.push(document.createElement("canvas"));
+            canvas[i].width = size;
+            canvas[i].height = size;
+            context.push(canvas[i].getContext("2d"));
+        }
+
+        // 色相をN^2分割（→彩度、↓輝度）
+        function draw0(canvas) {
+            let context = canvas.getContext("2d");
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let s = Math.floor((aSide - mod_i) / aSide * 100);
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let l = Math.floor((aSide - mod_j) / aSide * 100);
+                    let h = (1 - (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2)) * 360;
+
+                    context.fillStyle = "hsl(" + h + "," + s + "%," + l + "%)";
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 色相をN^2分割（→輝度、↓彩度）
+        function draw1(canvas) {
+            let context = canvas.getContext("2d");
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let l = Math.floor((aSide - mod_i) / aSide * 100);
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let s = Math.floor((aSide - mod_j) / aSide * 100);
+                    let h = (1 - (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2)) * 360;
+
+                    context.fillStyle = 'hsl(' + h + ',' + s + '%,' + l + '%)';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 彩度をN^2分割（→色相、↓輝度）
+        function draw2(canvas) {
+            let context = canvas.getContext("2d");
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let h = Math.floor((aSide - mod_i) / aSide * 360);
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let l = Math.floor((aSide - mod_j) / aSide * 100);
+                    let s = (1 - ((Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2))) * 100;
+
+                    context.fillStyle = 'hsl(' + h + ',' + s + '%,' + l + '%)';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 彩度をN^2分割（→輝度、↓色相）
+        function draw3(canvas) {
+            let context = canvas.getContext("2d");
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let l = Math.floor((aSide - mod_i) / aSide * 100);
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let h = Math.floor((aSide - mod_j) / aSide * 360);
+                    let s = (1 - ((Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2))) * 100;
+
+                    context.fillStyle = 'hsl(' + h + ',' + s + '%,' + l + '%)';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 輝度をN^2分割（→色相、↓彩度）
+        function draw4(canvas) {
+            let context = canvas.getContext("2d");
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let h = Math.floor((aSide - mod_i) / aSide * 360);
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let s = Math.floor((aSide - mod_j) / aSide * 100);
+                    let l = (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2) * 100;
+
+                    // 輝度が0,100は白黒なので、少しずらす
+                    let gap = Math.floor(100 / (N ** 2) / 2);
+                    l = l + gap;
+
+                    context.fillStyle = 'hsl(' + h + ',' + s + '%,' + l + '%)';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        // 輝度をN^2分割（→彩度、↓色相）
+        function draw5(canvas) {
+            let context = canvas.getContext("2d");
+            for (let i = 0; i < size; i++) {
+                let mod_i = i % aSide;
+                let s = Math.floor((aSide - mod_i) / aSide * 100);
+
+                for (let j = 0; j < size; j++) {
+                    let mod_j = j % aSide;
+                    let h = Math.floor((aSide - mod_j) / aSide * 360);
+                    let l = (Math.floor(i / aSide) + N * Math.floor(j / aSide)) / (N ** 2) * 100;
+
+                    // 輝度が0,100は白黒なので、少しずらす
+                    let gap = Math.floor(100 / (N ** 2) / 2);
+                    l = l + gap;
+
+                    context.fillStyle = 'hsl(' + h + ',' + s + '%,' + l + '%)';
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+            return canvas;
+        }
+
+        document.body.appendChild(draw0(canvas[0]));
+        document.body.appendChild(draw1(canvas[1]));
+        document.body.appendChild(draw2(canvas[2]));
+        document.body.appendChild(draw3(canvas[3]));
+        document.body.appendChild(draw4(canvas[4]));
+        document.body.appendChild(draw5(canvas[5]));
+    </script>
+</body>
+
+</html>
