@@ -1,0 +1,55 @@
+<html>
+
+<body>
+    <script>
+        /*
+            HSL色空間について
+            hue：色相 （0~360）
+            saturation：彩度 (0% ~ 100%)
+            lightness：輝度 (0% ~ 100%)
+        */
+        let canvas = document.createElement("canvas");
+        let N = 16;
+        let border = N / 2;
+        canvas.width = N;
+        canvas.height = N;
+
+        function draw(canvas) {
+            let context = canvas.getContext("2d");
+            let h, s, l;
+            // 横は色相のグラデーション
+            for (let i = 0; i < N; ++i) {
+                h = Math.floor(360 / N * i);
+
+                // 縦は彩度と輝度を分けてグラデーション
+                for (let j = 0; j < N; ++j) {
+                    // 一番上の行は、白黒のグラデーション
+                    if (j == 0) {
+                        s = 0;
+                        l = Math.floor(100 / N * i);
+                        context.fillStyle = "hsl(" + h + "," + s + "%," + l + "%)";
+                        context.fillRect(i, j, 1, 1);
+                    } else {
+                        // 彩度
+                        if (j < border) {
+                            s = Math.floor(100 / N * 2 * j);
+                            l = 50;
+                        }
+                        // 輝度
+                        if (border <= j) {
+                            let J = j - border + 1;
+                            l = Math.floor(100 / (N + 1) * 2 * J);
+                            s = 100;
+                        }
+                        context.fillStyle = "hsl(" + h + "," + s + "%," + l + "%)";
+                        context.fillRect(i, j, 1, 1);
+                    }
+                }
+            }
+            return canvas;
+        }
+        document.body.appendChild(draw(canvas));
+    </script>
+</body>
+
+</html>
