@@ -13,9 +13,9 @@ Unityでマテリアル数を削減するために、カラーマップ（パレ
 UV1にこのカラーマップを充てて、UV2にノーマルマップを充てる。  
 ![img](https://user-images.githubusercontent.com/79532972/151468713-3a89e4dc-365b-405b-b3ea-0f62f9fa1b9e.png)
 
+## inputTravelCost.js
+交通費の申請が面倒だったので作成した。
+
 ## makeBlendShapeAssets.ps1
 UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加する。  
 3Dモデルをパーフェクトシンクに対応させるために作成した。
-
-## inputTravelCost.js
-交通費の申請が面倒だったので作成した。
