@@ -16,3 +16,6 @@ UV1にこのカラーマップを充てて、UV2にノーマルマップを充�
 ## makeBlendShapeAssets.ps1
 UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加する。  
 3Dモデルをパーフェクトシンクに対応させるために作成した。
+
+## inputTravelCost.js
+交通費の申請が面倒だったので作成した。
