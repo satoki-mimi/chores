@@ -19,3 +19,6 @@ UV1にこのカラーマップを充てて、UV2にノーマルマップを充�
 ## makeBlendShapeAssets.ps1
 UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加する。  
 3Dモデルをパーフェクトシンクに対応させるために作成した。
+
+## renameBones.py
+Blenderが左右対称であることを認識できるように、VRoidモデルのボーンの名前を変更する。
