@@ -22,3 +22,6 @@ UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加�
 
 ## renameBones.py
 Blenderが左右対称であることを認識できるように、VRoidモデルのボーンの名前を変更する。
+
+## uninstallApplication
+スクリプトでアプリケーションをアンインストールするために作成した。
