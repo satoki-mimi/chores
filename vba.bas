@@ -27,7 +27,6 @@ End Function
 
 
 '正規表現で文字列を置換する関数
-'str = "1-2-3-4,6-7,9-10-11,13-14,16,17"
 Function replaceStr(str, pattern, alt)
     Dim endFlag As Boolean
     Dim tmpStr As String
