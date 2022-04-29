@@ -17,8 +17,8 @@ Function omitNum(arr)
         End If
     Next i
     str = str + arr(UBound(arr))
-    str = replaceStr(str, "(,\d{4})-(\d{4},)", "$1,$2") '③
-    str = replaceStr(str, "-\d{4}-", "-") '④
+    str = replaceStr(str, "(,\d{1,})-(\d{1,},)", "$1,$2") '③
+    str = replaceStr(str, "-\d{1,}-", "-") '④
     str = replaceStr(str, "-+", "~") '⑤
     ' ３桁区切り表示とされないように、カンマを読点に変更する
     str = Replace(str, ",", "、", 1, -1)
@@ -55,7 +55,7 @@ Function bubbleSort(arr)
     Dim i, j As Integer
     For i = 0 To UBound(arr) - 1
         For j = 0 To UBound(arr) - 1
-            If arr(j) > arr(j + 1) Then
+            If Val(arr(j)) > Val(arr(j + 1)) Then
                 tmp = arr(j)
                 arr(j) = arr(j + 1)
                 arr(j + 1) = tmp
