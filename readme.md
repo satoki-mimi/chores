@@ -23,7 +23,7 @@ UnityのARKitBlendShapeLocationに従って、AvatorにBlendShapeClipを追加�
 Blenderが左右対称であることを認識できるように、VRoidモデルのボーンの名前を変更する。
 
 ## uninstallApplication.ps1
-スクリプトでアプリケーションをアンインストールするために作成した。
+PowerShellスクリプトでアプリケーションをアンインストールするために作成した。
 
 ## vba.bas
 作成したVBAのユーザ定義関数を追記してゆく。
