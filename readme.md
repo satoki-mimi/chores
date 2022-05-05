@@ -19,7 +19,7 @@
   - PowerShellスクリプトでアプリケーションをアンインストールするために作成した。
 
 ## Python
-- deleteTweets
+- deleteTweets.py
   - ツイートを削除するために作成した。
 
 - renameBones.py
