@@ -24,3 +24,6 @@ Blenderが左右対称であることを認識できるように、VRoidモデ�
 
 ## uninstallApplication.ps1
 スクリプトでアプリケーションをアンインストールするために作成した。
+
+## vba.bas
+作成したVBAのユーザ定義関数を追記してゆく。
