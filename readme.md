@@ -5,7 +5,7 @@
 - bouncingBalls.html
   - canvasでボールがバウンドする。クリックすると消える。なぜか職場の同僚から作ってほしいと言われたので作成した。 
 
-- colorPalette.html / colorMapsHSV.html / colorMapsHSL.html  
+- colorPalette.html, colorMapsHSV.html, colorMapsHSL.html  
   - Unityでマテリアル数を削減するためにカラーマップを作成した。 
 
 - inputTravelCost.js
