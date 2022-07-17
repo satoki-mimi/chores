@@ -1,4 +1,4 @@
-function makeForm() {
+function sheet2form() {
 
   //配列からキーワードに一致する要素のインデックスを返す
   function findIndex(values, keyword) {
