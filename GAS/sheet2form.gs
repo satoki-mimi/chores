@@ -10,7 +10,7 @@ function sheet2form() {
   }
 
   //シート全体を二次元配列に格納する
-  const sheet = SpreadsheetApp.getActive().getSheetByName('フォーム作成用');
+  const sheet = SpreadsheetApp.getActive().getActiveSheet();
   let values = sheet.getDataRange().getValues();
 
   //「_FORM」、「_BEGIN」、「_END」のセルを探す
