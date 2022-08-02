@@ -28,6 +28,9 @@
 
 - renameBones.py
   - Blenderが左右対称であることを認識できるように、VRoidモデルのボーンの名前を変更する。
+  
+- renameBones_vrm2pmx.py
+  - Blenderにて、VRoidモデル（VRM）からMMDモデル（PMX）となるようにボーンの名前を変更する。
 
 ## VBA
 - vba.bas
