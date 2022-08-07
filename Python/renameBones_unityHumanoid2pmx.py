@@ -6,7 +6,7 @@ def rename_bones():
     elif bone.name == 'Hips': bone.name = '下半身'
     elif bone.name == 'Spine': bone.name = '上半身'
     elif bone.name == 'Chest': bone.name = '上半身1' #後ほどDissolve
-    elif bone.name == 'UpperChest': bone.name = '上半身2'
+    elif bone.name == 'Upper_Chest': bone.name = '上半身2'
     elif bone.name == 'Bust.L': bone.name = 'おっぱい.L'
     elif bone.name == 'Bust.R': bone.name = 'おっぱい.R'
     elif bone.name == 'Bust2.L': bone.name = 'おっぱい2.L' #基本のボーンにはない
