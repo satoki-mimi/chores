@@ -25,6 +25,10 @@
 ## Python
 - deleteTweets.py
   - ツイートを削除するために作成した。
+  
+## Unity
+- AddPerfectSyncBlendShapeClip.cs
+  - VRMモデルのBlendShapeにパーフェクトシンク用のクリップを追加するために作成した。
 
 ## VBA
 - vba.bas
