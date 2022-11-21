@@ -127,6 +127,7 @@ namespace UniVRM10
                         RelativePath = meshName,
                         Weight = 1.0f
                     };
+                    clip.Clip.MorphTargetBindings = null;
                     clip.Clip.MorphTargetBindings = new MorphTargetBinding[] { MTB };
                 }
             }
