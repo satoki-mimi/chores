@@ -28,7 +28,9 @@
   
 ## Unity
 - AddPerfectSyncBlendShapeClip.cs
-  - VRMモデルのBlendShapeにパーフェクトシンク用のクリップを追加するために作成した。
+  - VRM0モデルのBlendShapeにパーフェクトシンク用のクリップを追加するために作成した。
+- AddPerfectSyncExpression.cs
+  - VRM1モデルのExpressionにパーフェクトシンク用のクリップを追加するために作成した。
 
 ## VBA
 - vba.bas
