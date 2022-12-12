@@ -1,86 +1,32 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using UniGLTF;
 
 namespace VRM
 {
     public class AddPerfectSyncBlendShapeClip : MonoBehaviour
     {
-        string[] shapeNames = new string[] {
-            "BrowDownLeft",
-            "BrowDownRight",
-            "BrowInnerUp",
-            "BrowOuterUpLeft",
-            "BrowOuterUpRight",
-            "CheekPuff",
-            "CheekSquintLeft",
-            "CheekSquintRight",
-            "EyeBlinkLeft",
-            "EyeBlinkRight",
-            "EyeLookDownLeft",
-            "EyeLookDownRight",
-            "EyeLookInLeft",
-            "EyeLookInRight",
-            "EyeLookOutLeft",
-            "EyeLookOutRight",
-            "EyeLookUpLeft",
-            "EyeLookUpRight",
-            "EyeSquintLeft",
-            "EyeSquintRight",
-            "EyeWideLeft",
-            "EyeWideRight",
-            "JawForward",
-            "JawLeft",
-            "JawOpen",
-            "JawRight",
-            "MouthClose",
-            "MouthDimpleLeft",
-            "MouthDimpleRight",
-            "MouthFrownLeft",
-            "MouthFrownRight",
-            "MouthFunnel",
-            "MouthLeft",
-            "MouthLowerDownLeft",
-            "MouthLowerDownRight",
-            "MouthPressLeft",
-            "MouthPressRight",
-            "MouthPucker",
-            "MouthRight",
-            "MouthRollLower",
-            "MouthRollUpper",
-            "MouthShrugLower",
-            "MouthShrugUpper",
-            "MouthSmileLeft",
-            "MouthSmileRight",
-            "MouthStretchLeft",
-            "MouthStretchRight",
-            "MouthUpperUpLeft",
-            "MouthUpperUpRight",
-            "NoseSneerLeft",
-            "NoseSneerRight",
-            "TongueOut"
-        };
-
         // AssetsフォルダのVRMプレハブをセットしてもらう
         public GameObject VRMPrefab;
-
         // 縦の三点リーダーから関数を実行してもらう
         [ContextMenu("AddPerfectSyncBlendShapeClip")]
         public void AddBlendShapeClip()
         {
+            // パスを特定する
             var vrmPrefabPath = AssetDatabase.GetAssetPath(VRMPrefab);
             var ext = ".prefab";
             var blendShapePath = vrmPrefabPath.Replace(ext, ".BlendShapes/BlendShape.asset");
+
+            // アバターをロードする
             var blendShapeAvatar = AssetDatabase.LoadAssetAtPath<BlendShapeAvatar>(blendShapePath);
-            var manager = PreviewSceneManager.GetOrCreate(VRMPrefab);
-            var proxy = manager.GetComponent<VRMBlendShapeProxy>();
-            Mesh mesh = null;
-            int blendShapeCount = 0;
 
             // BlendShapeがあるメッシュを特定する
-            foreach (var transform in manager.Prefab.transform.GetChildren())
+            Mesh mesh = null;
+            int blendShapeCount = 0;
+            int transformCount = VRMPrefab.transform.childCount;
+            for (int i = 0; i < transformCount; i++)
             {
+                var transform = VRMPrefab.transform.GetChild(i);
                 var skinnedMeshRenderer = transform.GetComponent<SkinnedMeshRenderer>();
                 if (skinnedMeshRenderer != null)
                 {
@@ -94,18 +40,20 @@ namespace VRM
             }
 
             // Clipを追加してゆく
-            for (int i = 0; i < shapeNames.Length; i++)
+            for (int i = 0; i < blendShapeCount; i++)
             {
-                var assetName = shapeNames[i] + ".asset";
+                var name = mesh.GetBlendShapeName(i);
+                var assetName = name + ".asset";
                 var clipPath = blendShapePath.Replace("BlendShape.asset", assetName);
-                if (!File.Exists(clipPath))
-                { 
+                var DefaultClipPath = blendShapePath.Replace(".asset", "." + assetName);
+                if (!File.Exists(clipPath) && !File.Exists(DefaultClipPath))
+                {
                     var clip = ScriptableObject.CreateInstance<BlendShapeClip>();
-                    clip.name = shapeNames[i];
-                    clip.BlendShapeName = shapeNames[i];
+                    clip.name = name;
+                    clip.BlendShapeName = name;
                     clip.Preset = BlendShapePreset.Unknown;
                     AssetDatabase.CreateAsset(clip, clipPath);
-                    if (blendShapeAvatar.GetClip(shapeNames[i]) == null)
+                    if (blendShapeAvatar.GetClip(name) == null)
                     {
                         blendShapeAvatar.Clips.Add(clip);
                     }
@@ -113,11 +61,13 @@ namespace VRM
             }
 
             // Weightを設定してゆく
-            var meshName = mesh.name.Replace(".baked","");
+            var proxy = VRMPrefab.GetComponent<VRMBlendShapeProxy>();
+            var meshName = mesh.name.Replace(".baked", "");
             for (int i = 0; i < blendShapeCount; i++)
             {
                 var clip = proxy.BlendShapeAvatar.GetClip(mesh.GetBlendShapeName(i));
-                if(clip != null) {
+                if (clip != null)
+                {
                     var BlendShapeIndex = mesh.GetBlendShapeIndex(clip.BlendShapeName);
                     if (BlendShapeIndex != -1)
                     {
