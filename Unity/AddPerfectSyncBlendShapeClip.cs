@@ -65,16 +65,15 @@ namespace VRM
             var meshName = mesh.name.Replace(".baked", "");
             for (int i = 0; i < blendShapeCount; i++)
             {
-                var clip = proxy.BlendShapeAvatar.GetClip(mesh.GetBlendShapeName(i));
-                if (clip != null)
+                for (int j = 0; j < proxy.BlendShapeAvatar.Clips.Count; j++)
                 {
-                    var BlendShapeIndex = mesh.GetBlendShapeIndex(clip.BlendShapeName);
-                    if (BlendShapeIndex != -1)
+                    var clip = proxy.BlendShapeAvatar.Clips[j];
+                    if (mesh.GetBlendShapeName(i) == clip.BlendShapeName)
                     {
                         var value = new BlendShapeBinding
                         {
                             RelativePath = meshName,
-                            Index = BlendShapeIndex,
+                            Index = i,
                             Weight = 100.0f
                         };
                         clip.Values = null;
